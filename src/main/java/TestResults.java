@@ -5,13 +5,13 @@ public class TestResults {
 
     public static void main(String[] args) {
 
-        updateGrades();
+        printGrades();
 
     }
 
-    public static Map getOriginalGrades(){
+    public static Map<String, Integer> getOriginalGrades(){
 
-        Map grades = new HashMap();
+        Map<String, Integer> grades = new HashMap<>();
         grades.put("Angie", 24);
         grades.put("Dave", 32);
         grades.put("Lisi", 80);
@@ -27,9 +27,9 @@ public class TestResults {
         return grades;
     }
 
-    public static Map getMakeUpGrades(){
+    public static Map<String, Integer> getMakeUpGrades(){
 
-        Map grades = new HashMap();
+        Map<String, Integer> grades = new HashMap<>();
         grades.put("Angie", 97);
         grades.put("Dave", 82);
         grades.put("Lisi", 76);
@@ -45,19 +45,27 @@ public class TestResults {
         return grades;
     }
 
-    public static Map updateGrades(){
+    public static Map<String, Integer> updateGrades(){
         Map<String, Integer> originalGrades = getOriginalGrades();
         Map<String, Integer> makeUpGrades = getMakeUpGrades();
         Map<String, Integer> updatedGrades = new HashMap<>();
 
         originalGrades.forEach((k,v)-> {
-            if(makeUpGrades.get(k) > v) {
+            if(makeUpGrades.get(k) != null && makeUpGrades.get(k) > v) {
                         updatedGrades.put(k, makeUpGrades.get(k));
                     } else {
                         updatedGrades.put(k, v);
                     }
                 });
         return updatedGrades;
+    }
+
+    public static void printGrades(){
+        Map<String, Integer> updatedGrades = updateGrades();
+
+        updatedGrades.forEach((k, v)-> {
+            System.out.println("Name: " + k + ", Grade: " + v);
+        });
     }
 
 }
