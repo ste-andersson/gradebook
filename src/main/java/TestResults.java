@@ -3,6 +3,12 @@ import java.util.Map;
 
 public class TestResults {
 
+    public static void main(String[] args) {
+
+        updateGrades();
+
+    }
+
     public static Map getOriginalGrades(){
 
         Map grades = new HashMap();
@@ -39,5 +45,19 @@ public class TestResults {
         return grades;
     }
 
+    public static Map updateGrades(){
+        Map<String, Integer> originalGrades = getOriginalGrades();
+        Map<String, Integer> makeUpGrades = getMakeUpGrades();
+        Map<String, Integer> updatedGrades = new HashMap<>();
+
+        originalGrades.forEach((k,v)-> {
+            if(makeUpGrades.get(k) > v) {
+                        updatedGrades.put(k, makeUpGrades.get(k));
+                    } else {
+                        updatedGrades.put(k, v);
+                    }
+                });
+        return updatedGrades;
+    }
 
 }
